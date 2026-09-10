@@ -24,23 +24,24 @@ const projects = [
   description="Websites, sistemas e consultoria para empresas que não aceitam o genérico. TCWeb é a prática de Tiago Carneiro, em Lousado, Vila Nova de Famalicão."
 >
   <main>
-    <!-- Hero: asymmetric, image bleeds to the viewport edge -->
-    <section class="tc-hero-a">
-      <div class="tc-hero-a__row">
-        <div class="tc-hero-a__copy">
+    <!-- Hero: centered copy beside a rotated, fanned photo stack -->
+    <Section tone="canvas">
+      <div class="tc-hero-b__row">
+        <div class="tc-hero-b__copy">
           <h1 class="tc-display">Presença digital à medida para marcas exigentes.</h1>
-          <p class="tc-hero-a__intro">Websites, sistemas e consultoria para empresas que não aceitam o genérico.</p>
+          <p class="tc-hero__intro">Websites, sistemas e consultoria para empresas que não aceitam o genérico.</p>
           <div class="tc-hero__actions">
             <Button href={withBase('contacto')}>Marcar conversa</Button>
             <Button href={withBase('projetos')} variant="quiet">Ver projetos</Button>
           </div>
         </div>
-        <div class="tc-hero-a__media">
-          <ImageSlot caption="Fotografia — fachada de projeto recente" class="tc-hero-a__media-main" />
-          <ImageSlot caption="Detalhe de interior" class="tc-hero-a__media-detail" />
+        <div class="tc-hero-b__media">
+          <div class="tc-hero-b__accent"></div>
+          <ImageSlot caption="Fotografia — fachada" class="tc-hero-b__photo tc-hero-b__photo--1" />
+          <ImageSlot caption="Detalhe de interior" class="tc-hero-b__photo tc-hero-b__photo--2" />
         </div>
       </div>
-    </section>
+    </Section>
 
     <!-- Services: one featured card (with image) beside two stacked ones -->
     <Section tone="canvas">

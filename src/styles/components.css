@@ -43,20 +43,22 @@
 .tc-project-card__title{margin:6px 0 8px}
 .tc-project-card__tags{display:flex;flex-wrap:wrap;gap:var(--tc-space-1)}
 
-/* Home hero — asymmetric, image bleeds to the viewport edge */
-.tc-hero-a{background:var(--tc-canvas);overflow:hidden}
-.tc-hero-a__row{display:flex;align-items:center;min-height:35rem}
-.tc-hero-a__copy{flex:0 0 46%;max-width:34rem;padding-left:clamp(var(--tc-gutter), 8vw, 6rem);padding-right:var(--tc-space-4)}
-.tc-hero-a__intro{margin-top:var(--tc-space-3);max-width:38ch;font-size:var(--tc-fs-body)}
-.tc-hero-a__media{flex:1;position:relative;height:32.5rem}
-.tc-hero-a__media-main{position:absolute;top:var(--tc-space-4);bottom:var(--tc-space-4);left:0;right:-4vw;aspect-ratio:auto;border-radius:var(--tc-radius-card) 0 0 var(--tc-radius-card)}
-.tc-hero-a__media-detail{position:absolute;width:13.75rem;height:16.25rem;left:-3.5rem;bottom:-2rem;aspect-ratio:auto;box-shadow:var(--tc-shadow-lg);border:5px solid var(--tc-canvas)}
+/* Home hero — centered copy beside a rotated, fanned photo stack */
+.tc-hero-b__row{display:flex;align-items:center;gap:var(--tc-space-4)}
+.tc-hero-b__copy{flex:0 0 48%}
+.tc-hero-b__media{flex:1;position:relative;height:26.25rem}
+.tc-hero-b__accent{position:absolute;width:16.25rem;height:20rem;left:4.375rem;top:1.25rem;background:var(--tc-accent);border-radius:var(--tc-radius-card);transform:rotate(6deg)}
+.tc-hero-b__photo{position:absolute;width:16.25rem;height:20rem;aspect-ratio:auto;box-shadow:var(--tc-shadow-lg)}
+.tc-hero-b__photo--1{left:2.5rem;top:0;transform:rotate(-3deg)}
+.tc-hero-b__photo--2{left:8.125rem;top:2.25rem;transform:rotate(4deg);border:5px solid var(--tc-canvas)}
 @media (max-width:900px){
-  .tc-hero-a__row{flex-direction:column;align-items:stretch;min-height:0}
-  .tc-hero-a__copy{flex:none;max-width:none;padding:var(--tc-space-6) var(--tc-gutter) 0}
-  .tc-hero-a__media{height:20rem;margin-top:var(--tc-space-5)}
-  .tc-hero-a__media-main{right:0;border-radius:var(--tc-radius-card)}
-  .tc-hero-a__media-detail{display:none}
+  .tc-hero-b__row{flex-direction:column;align-items:stretch}
+  .tc-hero-b__copy{flex:none}
+  .tc-hero-b__media{height:15rem;margin-top:var(--tc-space-5)}
+  .tc-hero-b__accent,.tc-hero-b__photo{width:11.25rem;height:14rem}
+  .tc-hero-b__accent{left:2.75rem;top:0.75rem}
+  .tc-hero-b__photo--1{left:1.5rem;top:0}
+  .tc-hero-b__photo--2{left:5.5rem;top:1.5rem}
 }
 
 /* Home services — one featured card (with image) beside two stacked ones */
