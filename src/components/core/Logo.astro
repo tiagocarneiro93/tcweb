@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../../lib/url';
+
 const files = {
   horizontal: 'tcweb-horizontal',
   short: 'tcweb-horizontal-short',
@@ -17,7 +19,7 @@ const { variant = 'horizontal', tone = 'midnight', height = 28, class: className
 const stem = files[variant] ?? files.horizontal;
 ---
 <img
-  src={`/logo/${stem}-${tone}.svg`}
+  src={withBase(`logo/${stem}-${tone}.svg`)}
   alt="TCWeb — Tiago Carneiro"
   height={height}
   style={`height:${height}px;width:auto`}

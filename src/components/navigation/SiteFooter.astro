@@ -1,10 +1,11 @@
 ---
 import Logo from '../core/Logo.astro';
 import Label from '../core/Label.astro';
+import { withBase } from '../../lib/url';
 
 const columns = [
   { title: 'Serviços', links: ['Websites', 'Sistemas', 'Consultoria'] },
-  { title: 'Empresa', links: [{ label: 'Projetos', href: '/projetos' }, { label: 'Sobre', href: '/sobre' }] },
+  { title: 'Empresa', links: [{ label: 'Projetos', href: withBase('projetos') }, { label: 'Sobre', href: withBase('sobre') }] },
 ];
 ---
 <footer class="tc-footer tc-dark">

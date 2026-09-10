@@ -11,6 +11,7 @@ import Tag from '../components/content/Tag.astro';
 import Hero from '../components/shared/Hero.astro';
 import SectionHead from '../components/shared/SectionHead.astro';
 import ImageSlot from '../components/shared/ImageSlot.astro';
+import { withBase } from '../lib/url';
 
 const services = [
   { title: 'Websites', body: 'Sites institucionais e portefólios desenhados ao pormenor, rápidos e acessíveis.' },
@@ -33,8 +34,8 @@ const projects = [
     <Hero
       title="Presença digital à medida para marcas exigentes."
       intro="Websites, sistemas e consultoria para empresas que não aceitam o genérico."
-      cta="Marcar conversa" ctaHref="/contacto"
-      secondary="Ver projetos" secondaryHref="/projetos"
+      cta="Marcar conversa" ctaHref={withBase('contacto')}
+      secondary="Ver projetos" secondaryHref={withBase('projetos')}
     />
 
     <Section tone="paper">
@@ -59,7 +60,7 @@ const projects = [
       <SectionHead label="Projetos selecionados" title="Trabalho recente" />
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--tc-space-3)">
         {projects.map((p) => (
-          <a href="/projetos" class="tc-project-card">
+          <a href={withBase('projetos')} class="tc-project-card">
             <ImageSlot caption={p.title} />
             <div class="tc-project-card__meta">
               <Label>{p.eyebrow}</Label>
@@ -72,7 +73,7 @@ const projects = [
         ))}
       </div>
       <div style="margin-top:var(--tc-space-5)">
-        <Button href="/projetos" variant="quiet">Ver todos os projetos</Button>
+        <Button href={withBase('projetos')} variant="quiet">Ver todos os projetos</Button>
       </div>
     </Section>
 
@@ -83,7 +84,7 @@ const projects = [
           <AccentRule />
           <Label>Sobre</Label>
           <p style="margin-top:var(--tc-space-2)">TCWeb é a prática de Tiago Carneiro, desenvolvedor web e consultor de software, com quinze anos de experiência, em Lousado, Vila Nova de Famalicão.</p>
-          <Button href="/sobre" style="margin-top:var(--tc-space-3)">Conhecer o TCWeb</Button>
+          <Button href={withBase('sobre')} style="margin-top:var(--tc-space-3)">Conhecer o TCWeb</Button>
         </div>
       </div>
     </Section>

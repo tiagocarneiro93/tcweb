@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
+import { withBase } from '../lib/url';
 
 interface Props {
   title: string;
@@ -14,7 +15,7 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
