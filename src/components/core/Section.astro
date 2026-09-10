@@ -1,0 +1,14 @@
+---
+interface Props {
+  tone?: 'paper' | 'stone' | 'midnight';
+  padding?: 'normal' | 'tight' | 'flush';
+  class?: string;
+}
+const { tone = 'paper', padding = 'normal', class: className = '' } = Astro.props;
+const paddingClass = padding === 'tight' ? 'tc-section--tight' : padding === 'flush' ? 'tc-section--flush' : '';
+---
+<section class:list={['tc-section', paddingClass, tone === 'midnight' ? 'tc-dark' : `tc-section--${tone}`, className]}>
+  <div class="tc-container">
+    <slot />
+  </div>
+</section>

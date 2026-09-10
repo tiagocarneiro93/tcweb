@@ -1,0 +1,43 @@
+---
+import Logo from '../core/Logo.astro';
+import Label from '../core/Label.astro';
+
+const columns = [
+  { title: 'Serviços', links: ['Websites', 'Sistemas', 'Consultoria'] },
+  { title: 'Empresa', links: [{ label: 'Projetos', href: '/projetos' }, { label: 'Sobre', href: '/sobre' }] },
+];
+---
+<footer class="tc-footer tc-dark">
+  <div class="tc-footer__inner">
+    <div class="tc-footer__grid">
+      <div>
+        <Logo variant="stacked" tone="stone" height={72} />
+        <p class="tc-footer__tagline">Presença digital à medida.</p>
+      </div>
+      {columns.map((col) => (
+        <div>
+          <Label as="h3" class="tc-footer__col-title">{col.title}</Label>
+          <ul class="tc-footer__links">
+            {col.links.map((l) => {
+              const label = typeof l === 'string' ? l : l.label;
+              const href = typeof l === 'string' ? '#' : l.href;
+              return <li><a href={href}>{label}</a></li>;
+            })}
+          </ul>
+        </div>
+      ))}
+      <div>
+        <Label as="h3" class="tc-footer__col-title">Contacto</Label>
+        <div class="tc-footer__contact">
+          <a href="mailto:[EMAIL]">[EMAIL]</a>
+          <span>[TELEFONE]</span>
+          <span>Lousado · Vila Nova de Famalicão</span>
+        </div>
+      </div>
+    </div>
+    <div class="tc-footer__legal">
+      <span>© {new Date().getFullYear()} TCWeb · Tiago Carneiro</span>
+      <span>NIF [NIF]</span>
+    </div>
+  </div>
+</footer>

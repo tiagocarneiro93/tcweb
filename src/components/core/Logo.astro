@@ -1,0 +1,25 @@
+---
+const files = {
+  horizontal: 'tcweb-horizontal',
+  short: 'tcweb-horizontal-short',
+  stacked: 'tcweb-stacked',
+  wordmark: 'tcweb-wordmark',
+  monogram: 'tcweb-monogram',
+} as const;
+
+interface Props {
+  variant?: keyof typeof files;
+  tone?: 'midnight' | 'stone';
+  height?: number;
+  class?: string;
+}
+const { variant = 'horizontal', tone = 'midnight', height = 28, class: className = '' } = Astro.props;
+const stem = files[variant] ?? files.horizontal;
+---
+<img
+  src={`/logo/${stem}-${tone}.svg`}
+  alt="TCWeb — Tiago Carneiro"
+  height={height}
+  style={`height:${height}px;width:auto`}
+  class={className}
+/>

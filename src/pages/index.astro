@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/core/Section.astro';
+import AccentRule from '../components/core/AccentRule.astro';
+import Label from '../components/core/Label.astro';
+import Button from '../components/core/Button.astro';
+import Card from '../components/content/Card.astro';
+import Stat from '../components/content/Stat.astro';
+import Quote from '../components/content/Quote.astro';
+import Tag from '../components/content/Tag.astro';
+import Hero from '../components/shared/Hero.astro';
+import SectionHead from '../components/shared/SectionHead.astro';
+import ImageSlot from '../components/shared/ImageSlot.astro';
+
+const services = [
+  { title: 'Websites', body: 'Sites institucionais e portefólios desenhados ao pormenor, rápidos e acessíveis.' },
+  { title: 'Sistemas', body: 'Integrações, automações e manutenção dos sistemas que a sua empresa já usa.' },
+  { title: 'Consultoria', body: 'Quinze anos de experiência ao serviço das suas decisões técnicas.' },
+];
+
+// Placeholder case studies — replace with real client work before launch.
+const projects = [
+  { eyebrow: 'Imobiliário', title: 'Quinta do Vale', tags: ['Identidade', 'Website', 'SEO'] },
+  { eyebrow: 'Retalho', title: 'Casa Alvarinho', tags: ['Loja online', 'Integrações'] },
+  { eyebrow: 'Serviços', title: 'Clínica Norte', tags: ['Website', 'Marcações'] },
+];
+---
+<BaseLayout
+  title="TCWeb · Presença digital à medida"
+  description="Websites, sistemas e consultoria para empresas que não aceitam o genérico. TCWeb é a prática de Tiago Carneiro, em Lousado, Vila Nova de Famalicão."
+>
+  <main>
+    <Hero
+      title="Presença digital à medida para marcas exigentes."
+      intro="Websites, sistemas e consultoria para empresas que não aceitam o genérico."
+      cta="Marcar conversa" ctaHref="/contacto"
+      secondary="Ver projetos" secondaryHref="/projetos"
+    />
+
+    <Section tone="paper">
+      <SectionHead label="Serviços" title="O que fazemos" intro="Três frentes de trabalho, uma só forma de trabalhar: com método e atenção ao detalhe." />
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--tc-space-3)">
+        {services.map((s, i) => (
+          <Card index={i + 1} title={s.title}>{s.body}</Card>
+        ))}
+      </div>
+    </Section>
+
+    <Section tone="stone">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--tc-space-4)">
+        <Stat value="15" label="Anos de experiência" />
+        <Stat value="100/100" label="Lighthouse" />
+        <Stat value="<24h" label="Tempo de resposta" />
+        <Stat value="PT" label="Famalicão, Portugal" />
+      </div>
+    </Section>
+
+    <Section tone="paper">
+      <SectionHead label="Projetos selecionados" title="Trabalho recente" />
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--tc-space-3)">
+        {projects.map((p) => (
+          <a href="/projetos" class="tc-project-card">
+            <ImageSlot caption={p.title} />
+            <div class="tc-project-card__meta">
+              <Label>{p.eyebrow}</Label>
+              <h3 class="tc-project-card__title">{p.title}</h3>
+              <div class="tc-project-card__tags">
+                {p.tags.map((t) => <Tag>{t}</Tag>)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div style="margin-top:var(--tc-space-5)">
+        <Button href="/projetos" variant="quiet">Ver todos os projetos</Button>
+      </div>
+    </Section>
+
+    <Section tone="midnight">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--tc-space-6);align-items:start">
+        <Quote author="Ana Ribeiro" role="Diretora, Vale Imobiliária">Percebeu a marca antes de escrever uma linha de código.</Quote>
+        <div>
+          <AccentRule />
+          <Label>Sobre</Label>
+          <p style="margin-top:var(--tc-space-2)">TCWeb é a prática de Tiago Carneiro, desenvolvedor web e consultor de software, com quinze anos de experiência, em Lousado, Vila Nova de Famalicão.</p>
+          <Button href="/sobre" style="margin-top:var(--tc-space-3)">Conhecer o TCWeb</Button>
+        </div>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

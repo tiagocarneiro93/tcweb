@@ -1,0 +1,8 @@
+---
+interface Props {
+  align?: 'start' | 'center';
+  class?: string;
+}
+const { align = 'start', class: className = '' } = Astro.props;
+---
+<hr class:list={['tc-rule', align === 'center' && 'tc-rule--center', className]} />

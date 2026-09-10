@@ -1,0 +1,11 @@
+---
+interface Props {
+  caption?: string;
+  tone?: 'stone' | 'midnight';
+  class?: string;
+}
+const { caption = 'Fotografia', tone = 'stone', class: className = '' } = Astro.props;
+---
+<div class:list={['tc-image-slot', tone === 'midnight' && 'tc-image-slot--midnight', className]}>
+  {caption}
+</div>

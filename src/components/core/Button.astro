@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string;
+  variant?: 'outline' | 'quiet';
+  size?: 'sm' | 'md' | 'lg';
+}
+const { href, variant = 'outline', size = 'md', class: className = '', ...rest } = Astro.props;
+const sizeClass = size === 'sm' ? 'tc-button--sm' : size === 'lg' ? 'tc-button--lg' : '';
+const variantClass = variant === 'quiet' ? 'tc-button--quiet' : '';
+---
+<a href={href} class:list={['tc-button', sizeClass, variantClass, className]} {...rest}>
+  <slot />
+</a>

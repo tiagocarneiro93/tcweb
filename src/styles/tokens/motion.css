@@ -1,0 +1,8 @@
+:root{
+--tc-duration-fast:150ms;
+--tc-duration:250ms;
+--tc-duration-slow:450ms;
+--tc-ease:cubic-bezier(0.22,0.61,0.36,1); /* ease-out, no bounce */
+--tc-transition:background-color var(--tc-duration) var(--tc-ease),color var(--tc-duration) var(--tc-ease),border-color var(--tc-duration) var(--tc-ease),opacity var(--tc-duration) var(--tc-ease);
+}
+@media (prefers-reduced-motion:reduce){:root{--tc-duration-fast:0ms;--tc-duration:0ms;--tc-duration-slow:0ms}}

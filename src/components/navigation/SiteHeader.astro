@@ -1,0 +1,26 @@
+---
+import Logo from '../core/Logo.astro';
+import NavLink from './NavLink.astro';
+import Button from '../core/Button.astro';
+
+const items = [
+  { label: 'Serviços', href: '/servicos' },
+  { label: 'Projetos', href: '/projetos' },
+  { label: 'Sobre', href: '/sobre' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+<header class="tc-header tc-dark">
+  <div class="tc-header__bar">
+    <a href="/" style="display:block">
+      <Logo variant="short" tone="stone" height={26} />
+    </a>
+    <nav class="tc-header__nav">
+      {items.map((it) => (
+        <NavLink href={it.href} active={currentPath === it.href}>{it.label}</NavLink>
+      ))}
+      <Button href="/contacto" size="sm">Marcar conversa</Button>
+    </nav>
+  </div>
+</header>

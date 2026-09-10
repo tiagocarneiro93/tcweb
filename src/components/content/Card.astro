@@ -1,0 +1,13 @@
+---
+interface Props {
+  title?: string;
+  index?: number;
+  class?: string;
+}
+const { title, index, class: className = '' } = Astro.props;
+---
+<div class:list={['tc-card', className]}>
+  {index != null && <span class="tc-card__index">{String(index).padStart(2, '0')}</span>}
+  {title && <h3 class="tc-card__title">{title}</h3>}
+  <p class="tc-card__body"><slot /></p>
+</div>

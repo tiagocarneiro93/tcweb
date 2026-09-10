@@ -1,0 +1,9 @@
+/* Jost — SIL Open Font License. The brand kit loads it from Google Fonts.
+   For EU/GDPR-sensitive client sites, self-host: drop jost-300/400/500.woff2
+   into public/fonts/ and uncomment the @font-face block below. */
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap");
+/*
+@font-face{font-family:"Jost";font-weight:300;font-style:normal;font-display:swap;src:url("/fonts/jost-300.woff2") format("woff2")}
+@font-face{font-family:"Jost";font-weight:400;font-style:normal;font-display:swap;src:url("/fonts/jost-400.woff2") format("woff2")}
+@font-face{font-family:"Jost";font-weight:500;font-style:normal;font-display:swap;src:url("/fonts/jost-500.woff2") format("woff2")}
+*/

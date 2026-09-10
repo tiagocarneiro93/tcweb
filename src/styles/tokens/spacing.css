@@ -1,0 +1,15 @@
+:root{
+/* 8px base */
+--tc-space-1:0.5rem;  /* 8 */
+--tc-space-2:1rem;    /* 16 */
+--tc-space-3:1.5rem;  /* 24 */
+--tc-space-4:2rem;    /* 32 */
+--tc-space-5:3rem;    /* 48 */
+--tc-space-6:4.5rem;  /* 72 */
+--tc-space-7:7rem;    /* 112 */
+
+--tc-max-width:72rem;   /* 1152px content container */
+--tc-gutter:var(--tc-space-3);
+--tc-section-y:var(--tc-space-7);
+--tc-section-y-tight:var(--tc-space-6);
+}

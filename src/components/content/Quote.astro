@@ -1,0 +1,15 @@
+---
+interface Props {
+  author?: string;
+  role?: string;
+}
+const { author, role } = Astro.props;
+---
+<figure class="tc-quote">
+  <blockquote class="tc-quote__body"><slot /></blockquote>
+  {author && (
+    <figcaption class="tc-quote__caption">
+      {author}{role && <span> · {role}</span>}
+    </figcaption>
+  )}
+</figure>

@@ -1,0 +1,18 @@
+---
+import AccentRule from '../core/AccentRule.astro';
+import Label from '../core/Label.astro';
+
+interface Props {
+  label: string;
+  title: string;
+  intro?: string;
+  align?: 'start' | 'center';
+}
+const { label, title, intro, align = 'start' } = Astro.props;
+---
+<div class:list={['tc-section-head', align === 'center' && 'tc-section-head--center']}>
+  <AccentRule align={align} />
+  <Label>{label}</Label>
+  <h2 class="tc-section-head__title">{title}</h2>
+  {intro && <p class="tc-section-head__intro">{intro}</p>}
+</div>

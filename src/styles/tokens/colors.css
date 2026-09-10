@@ -1,0 +1,42 @@
+:root{
+/* Core palette — 55% midnight, 30% stone/paper, 9% slate/mist, <=6% accent */
+--tc-midnight:#0E1B2C;
+--tc-midnight-alt:#13243A;
+--tc-stone:#E8E3DA;
+--tc-paper:#F7F5F1;
+--tc-white:#FFFFFF;
+--tc-slate:#5B6573;
+--tc-mist:#8E97A3;
+--tc-champagne:#C9B79C;
+--tc-bronze:#6E5A40;
+
+/* Semantic roles — light theme (default) */
+--tc-bg:var(--tc-paper);
+--tc-bg-alt:var(--tc-stone);
+--tc-text:var(--tc-midnight);
+--tc-text-muted:var(--tc-slate);
+--tc-accent:var(--tc-bronze);
+--tc-rule:rgba(14,27,44,0.14);
+--tc-rule-soft:rgba(14,27,44,0.08);
+--tc-accent-wash:rgba(110,90,64,0.08);
+
+/* Status. The brand has no semantic palette of its own: errors borrow a muted
+   brick that sits with bronze, success borrows slate. Use sparingly, in text. */
+--tc-danger:#A3423A;
+--tc-success:#4A5F52;
+}
+
+/* Dark sections: class="tc-dark" on any container */
+.tc-dark{
+--tc-bg:var(--tc-midnight);
+--tc-bg-alt:var(--tc-midnight-alt);
+--tc-text:var(--tc-stone);
+--tc-text-muted:var(--tc-mist);
+--tc-accent:var(--tc-champagne);
+--tc-rule:rgba(232,227,218,0.16);
+--tc-rule-soft:rgba(232,227,218,0.08);
+--tc-accent-wash:rgba(201,183,156,0.10);
+--tc-danger:#D08A82;
+background:var(--tc-bg);
+color:var(--tc-text);
+}

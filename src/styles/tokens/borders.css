@@ -1,0 +1,10 @@
+:root{
+--tc-radius:0;             /* sharp corners everywhere */
+--tc-rule-width:1px;       /* hairline */
+--tc-border:var(--tc-rule-width) solid var(--tc-rule);
+--tc-border-accent:var(--tc-rule-width) solid var(--tc-accent);
+--tc-accent-rule-length:2rem;
+--tc-shadow:none;          /* the brand uses no shadows */
+--tc-focus-ring:1px solid var(--tc-accent);
+--tc-focus-offset:3px;
+}
