@@ -8,22 +8,15 @@ import Card from '../components/content/Card.astro';
 import Stat from '../components/content/Stat.astro';
 import Quote from '../components/content/Quote.astro';
 import Tag from '../components/content/Tag.astro';
-import Hero from '../components/shared/Hero.astro';
 import SectionHead from '../components/shared/SectionHead.astro';
 import ImageSlot from '../components/shared/ImageSlot.astro';
 import { withBase } from '../lib/url';
 
-const services = [
-  { title: 'Websites', body: 'Sites institucionais e portefólios desenhados ao pormenor, rápidos e acessíveis.' },
-  { title: 'Sistemas', body: 'Integrações, automações e manutenção dos sistemas que a sua empresa já usa.' },
-  { title: 'Consultoria', body: 'Quinze anos de experiência ao serviço das suas decisões técnicas.' },
-];
-
 // Placeholder case studies — replace with real client work before launch.
 const projects = [
-  { eyebrow: 'Imobiliário', title: 'Quinta do Vale', tags: ['Identidade', 'Website', 'SEO'] },
-  { eyebrow: 'Retalho', title: 'Casa Alvarinho', tags: ['Loja online', 'Integrações'] },
-  { eyebrow: 'Serviços', title: 'Clínica Norte', tags: ['Website', 'Marcações'] },
+  { eyebrow: 'Imobiliário', title: 'Quinta do Vale', tags: ['Identidade', 'Website', 'SEO'], width: 420 },
+  { eyebrow: 'Retalho', title: 'Casa Alvarinho', tags: ['Loja online', 'Integrações'], width: 340 },
+  { eyebrow: 'Serviços', title: 'Clínica Norte', tags: ['Website', 'Marcações'], width: 340 },
 ];
 ---
 <BaseLayout
@@ -31,36 +24,61 @@ const projects = [
   description="Websites, sistemas e consultoria para empresas que não aceitam o genérico. TCWeb é a prática de Tiago Carneiro, em Lousado, Vila Nova de Famalicão."
 >
   <main>
-    <Hero
-      title="Presença digital à medida para marcas exigentes."
-      intro="Websites, sistemas e consultoria para empresas que não aceitam o genérico."
-      cta="Marcar conversa" ctaHref={withBase('contacto')}
-      secondary="Ver projetos" secondaryHref={withBase('projetos')}
-    />
+    <!-- Hero: asymmetric, image bleeds to the viewport edge -->
+    <section class="tc-hero-a">
+      <div class="tc-hero-a__row">
+        <div class="tc-hero-a__copy">
+          <h1 class="tc-display">Presença digital à medida para marcas exigentes.</h1>
+          <p class="tc-hero-a__intro">Websites, sistemas e consultoria para empresas que não aceitam o genérico.</p>
+          <div class="tc-hero__actions">
+            <Button href={withBase('contacto')}>Marcar conversa</Button>
+            <Button href={withBase('projetos')} variant="quiet">Ver projetos</Button>
+          </div>
+        </div>
+        <div class="tc-hero-a__media">
+          <ImageSlot caption="Fotografia — fachada de projeto recente" class="tc-hero-a__media-main" />
+          <ImageSlot caption="Detalhe de interior" class="tc-hero-a__media-detail" />
+        </div>
+      </div>
+    </section>
 
+    <!-- Services: one featured card (with image) beside two stacked ones -->
     <Section tone="canvas">
       <SectionHead label="Serviços" title="O que fazemos" intro="Três frentes de trabalho, uma só forma de trabalhar: com método e atenção ao detalhe." />
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--tc-space-3)">
-        {services.map((s, i) => (
-          <Card index={i + 1} title={s.title}>{s.body}</Card>
-        ))}
+      <div class="tc-services-a">
+        <div class="tc-card tc-services-a__featured">
+          <div>
+            <span class="tc-card__index">01</span>
+            <h3 class="tc-card__title">Websites</h3>
+            <p class="tc-card__body">Sites institucionais e portefólios desenhados ao pormenor, rápidos e acessíveis.</p>
+          </div>
+          <ImageSlot caption="Fotografia — website em ecrã" class="tc-services-a__image" />
+        </div>
+        <Card index={2} title="Sistemas">Integrações, automações e manutenção dos sistemas que a sua empresa já usa.</Card>
+        <Card index={3} title="Consultoria">Quinze anos de experiência ao serviço das suas decisões técnicas.</Card>
       </div>
     </Section>
 
-    <Section tone="canvas-alt">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--tc-space-4)">
-        <Stat value="15" label="Anos de experiência" />
-        <Stat value="100/100" label="Lighthouse" />
-        <Stat value="<24h" label="Tempo de resposta" />
-        <Stat value="PT" label="Famalicão, Portugal" />
+    <!-- Stats: overlaid on a full-bleed photo band -->
+    <section class="tc-dark tc-stats-photo">
+      <ImageSlot tone="ink" caption="Fotografia — mesa de trabalho" class="tc-stats-photo__bg" />
+      <div class="tc-stats-photo__scrim"></div>
+      <div class="tc-container tc-stats-photo__content">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--tc-space-4)">
+          <Stat value="15" label="Anos de experiência" />
+          <Stat value="100/100" label="Lighthouse" />
+          <Stat value="<24h" label="Tempo de resposta" />
+          <Stat value="PT" label="Famalicão, Portugal" />
+        </div>
       </div>
-    </Section>
+    </section>
 
+    <!-- Projects: horizontal scroll-style gallery -->
     <Section tone="canvas">
       <SectionHead label="Projetos selecionados" title="Trabalho recente" />
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--tc-space-3)">
+      <div class="tc-gallery">
         {projects.map((p) => (
-          <a href={withBase('projetos')} class="tc-project-card">
+          <a href={withBase('projetos')} class="tc-project-card tc-gallery__item" style={`width:clamp(240px, 80vw, ${p.width}px)`}>
             <ImageSlot caption={p.title} />
             <div class="tc-project-card__meta">
               <Label>{p.eyebrow}</Label>
