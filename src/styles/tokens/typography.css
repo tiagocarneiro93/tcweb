@@ -1,32 +1,38 @@
 :root{
---tc-font:"Jost","Futura","Century Gothic",system-ui,sans-serif;
---tc-font-mono:ui-monospace,"SFMono-Regular",monospace;
+/* Space Grotesk carries structure (headings, labels, buttons, numerals);
+   IBM Plex Sans carries reading text. Never swap the two roles. */
+--tc-font-display:"Space Grotesk","Helvetica Neue",system-ui,sans-serif;
+--tc-font:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+--tc-font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
 
 --tc-weight-light:300;
 --tc-weight-regular:400;
 --tc-weight-medium:500;
+--tc-weight-heading:500;
+--tc-weight-strong:600;
 
---tc-fs-display:3.5rem;
---tc-fs-h1:2.75rem;
+--tc-fs-display:3.75rem;
+--tc-fs-h1:2.875rem;
 --tc-fs-h2:2rem;
 --tc-fs-h3:1.25rem;                              /* 20px */
---tc-fs-body:1.0625rem;                          /* 17px */
---tc-fs-small:0.875rem;                          /* 14px */
+--tc-fs-body:1rem;                               /* 16px */
+--tc-fs-small:0.9375rem;                         /* 15px */
 --tc-fs-label:0.75rem;                           /* 12px */
 
---tc-lh-tight:1.15;
---tc-lh-body:1.7;
---tc-lh-snug:1.5;
+--tc-lh-tight:1.08;
+--tc-lh-body:1.68;
+--tc-lh-snug:1.45;
 
---tc-track-display:-0.005em;
---tc-track-caps:0.2em;
---tc-track-label:0.3em;
---tc-track-button:0.25em;
+/* Cobalto tracks headings tight and labels loose — that contrast, not weight,
+   is what carries the hierarchy. */
+--tc-track-display:-0.03em;
+--tc-track-heading:-0.02em;
+--tc-track-caps:0.14em;
+--tc-track-label:0.16em;
+--tc-track-button:0.1em;
 
---tc-measure:65ch;
+--tc-measure:68ch;
 }
 
-/* Fluid step-down on narrow viewports — the brand keeps hierarchy by size, so
-   headings shrink together rather than reflowing weight. */
-@media (max-width:900px){:root{--tc-fs-display:2.75rem;--tc-fs-h1:2.25rem;--tc-fs-h2:1.75rem}}
-@media (max-width:600px){:root{--tc-fs-display:2.25rem;--tc-fs-h1:1.875rem;--tc-fs-h2:1.5rem;--tc-fs-body:1rem}}
+@media (max-width:900px){:root{--tc-fs-display:2.875rem;--tc-fs-h1:2.25rem;--tc-fs-h2:1.75rem}}
+@media (max-width:600px){:root{--tc-fs-display:2.375rem;--tc-fs-h1:1.9375rem;--tc-fs-h2:1.5rem}}

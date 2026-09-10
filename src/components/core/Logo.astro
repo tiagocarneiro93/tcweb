@@ -11,11 +11,11 @@ const files = {
 
 interface Props {
   variant?: keyof typeof files;
-  tone?: 'midnight' | 'stone';
+  tone?: 'ink' | 'canvas';
   height?: number;
   class?: string;
 }
-const { variant = 'horizontal', tone = 'midnight', height = 28, class: className = '' } = Astro.props;
+const { variant = 'horizontal', tone = 'ink', height = 28, class: className = '' } = Astro.props;
 const stem = files[variant] ?? files.horizontal;
 ---
 <img

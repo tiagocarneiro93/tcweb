@@ -1,6 +1,5 @@
 ---
 import Section from '../core/Section.astro';
-import AccentRule from '../core/AccentRule.astro';
 import Label from '../core/Label.astro';
 import Button from '../core/Button.astro';
 
@@ -15,9 +14,8 @@ interface Props {
 }
 const { label, title, intro, cta, ctaHref, secondary, secondaryHref } = Astro.props;
 ---
-<Section tone="midnight" class="tc-hero">
-  <AccentRule />
-  {label && <Label>{label}</Label>}
+<Section tone="canvas" class="tc-hero">
+  {label && <Label pill>{label}</Label>}
   <h1 class="tc-display tc-hero__title">{title}</h1>
   {intro && <p class="tc-hero__intro">{intro}</p>}
   {cta && (

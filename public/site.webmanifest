@@ -1,0 +1,20 @@
+{
+  "name": "TCWeb · Tiago Carneiro",
+  "short_name": "TCWeb",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#14161A",
+  "background_color": "#F4F5F2",
+  "display": "standalone"
+}
