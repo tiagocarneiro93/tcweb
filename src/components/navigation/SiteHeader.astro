@@ -19,7 +19,11 @@ const currentPath = Astro.url.pathname;
     <a href={withBase('')} style="display:block">
       <Logo variant="short" tone="ink" height={26} />
     </a>
-    <nav class="tc-header__nav">
+    <input type="checkbox" id="nav-toggle" class="tc-header__toggle-input" />
+    <label for="nav-toggle" class="tc-header__toggle" aria-label="Abrir menu de navegação">
+      <span></span><span></span><span></span>
+    </label>
+    <nav class="tc-header__nav" id="site-nav">
       {items.map((it) => (
         <NavLink href={it.href} active={currentPath === it.href}>{it.label}</NavLink>
       ))}
@@ -27,3 +31,16 @@ const currentPath = Astro.url.pathname;
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  // Progressive enhancement only — the menu itself is a pure CSS
+  // checkbox toggle and works with this script disabled. This just
+  // closes it after a same-page anchor link, which a checkbox alone
+  // can't do since anchor navigation doesn't reload the page.
+  document.querySelectorAll('#site-nav a').forEach((link) => {
+    link.addEventListener('click', () => {
+      const toggle = document.getElementById('nav-toggle');
+      if (toggle) toggle.checked = false;
+    });
+  });
+</script>
