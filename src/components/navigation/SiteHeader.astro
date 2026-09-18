@@ -4,10 +4,12 @@ import NavLink from './NavLink.astro';
 import Button from '../core/Button.astro';
 import { withBase } from '../../lib/url';
 
+// Projetos and Sobre don't have enough real content yet for standalone
+// pages, so they point at the teaser sections on the home page instead.
 const items = [
   { label: 'Serviços', href: withBase('servicos') },
-  { label: 'Projetos', href: withBase('projetos') },
-  { label: 'Sobre', href: withBase('sobre') },
+  { label: 'Projetos', href: `${withBase('')}#projetos` },
+  { label: 'Sobre', href: `${withBase('')}#sobre` },
 ];
 
 const currentPath = Astro.url.pathname;

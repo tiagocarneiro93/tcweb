@@ -4,8 +4,21 @@ import Label from '../core/Label.astro';
 import { withBase } from '../../lib/url';
 
 const columns = [
-  { title: 'Serviços', links: ['Websites', 'Sistemas', 'Consultoria'] },
-  { title: 'Empresa', links: [{ label: 'Projetos', href: withBase('projetos') }, { label: 'Sobre', href: withBase('sobre') }] },
+  {
+    title: 'Serviços',
+    links: [
+      { label: 'Websites', href: `${withBase('servicos')}#websites` },
+      { label: 'Sistemas', href: `${withBase('servicos')}#sistemas` },
+      { label: 'Consultoria', href: `${withBase('servicos')}#consultoria` },
+    ],
+  },
+  {
+    title: 'Empresa',
+    links: [
+      { label: 'Projetos', href: `${withBase('')}#projetos` },
+      { label: 'Sobre', href: `${withBase('')}#sobre` },
+    ],
+  },
 ];
 ---
 <footer class="tc-footer tc-dark">
@@ -19,11 +32,9 @@ const columns = [
         <div>
           <Label as="h3" class="tc-footer__col-title">{col.title}</Label>
           <ul class="tc-footer__links">
-            {col.links.map((l) => {
-              const label = typeof l === 'string' ? l : l.label;
-              const href = typeof l === 'string' ? '#' : l.href;
-              return <li><a href={href}>{label}</a></li>;
-            })}
+            {col.links.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
           </ul>
         </div>
       ))}

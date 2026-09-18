@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/shared/Hero.astro';
+import Section from '../components/core/Section.astro';
+import SectionHead from '../components/shared/SectionHead.astro';
+import Label from '../components/core/Label.astro';
+import Button from '../components/core/Button.astro';
+import { withBase } from '../lib/url';
+
+const services = [
+  {
+    id: 'websites',
+    index: '01',
+    title: 'Websites',
+    intro: 'Sites institucionais, portefólios e lojas simples, desenhados ao pormenor, rápidos e acessíveis.',
+    items: [
+      'Design à medida, alinhado com a identidade da marca',
+      'Desenvolvimento rápido, acessível e responsivo',
+      'Otimização para motores de busca (SEO) desde o primeiro dia',
+      'Hospedagem, domínio e certificado de segurança configurados',
+    ],
+  },
+  {
+    id: 'sistemas',
+    index: '02',
+    title: 'Sistemas',
+    intro: 'Integrações, automações e manutenção dos sistemas que a sua empresa já usa.',
+    items: [
+      'Integração entre plataformas (CRM, faturação, marketing)',
+      'Automação de tarefas repetitivas',
+      'Manutenção e monitorização contínua',
+      'Migração e atualização de sistemas legados',
+    ],
+  },
+  {
+    id: 'consultoria',
+    index: '03',
+    title: 'Consultoria',
+    intro: 'Quinze anos de experiência ao serviço das suas decisões técnicas.',
+    items: [
+      'Auditorias técnicas e de performance',
+      'Escolha de stack e arquitetura',
+      'Acompanhamento de equipas e fornecedores',
+      'Formação e transferência de conhecimento',
+    ],
+  },
+];
+
+const steps = [
+  { step: '01', title: 'Conversa', body: 'Uma primeira conversa sem compromisso para perceber o projeto, os objetivos e o contexto do negócio.' },
+  { step: '02', title: 'Proposta', body: 'Proposta clara com âmbito, prazos e investimento, sem letras pequenas.' },
+  { step: '03', title: 'Desenho e desenvolvimento', body: 'Design e desenvolvimento em ciclos curtos, com feedback constante ao longo do processo.' },
+  { step: '04', title: 'Lançamento e suporte', body: 'Lançamento acompanhado e suporte contínuo depois de estar no ar.' },
+];
+---
+<BaseLayout
+  title="Serviços · TCWeb"
+  description="Websites, sistemas e consultoria: três frentes de trabalho, uma só forma de trabalhar, com método e atenção ao detalhe."
+  path="servicos"
+>
+  <main>
+    <Hero
+      label="Serviços"
+      title="Websites, sistemas e consultoria."
+      intro="Três frentes de trabalho, uma só forma de trabalhar: com método e atenção ao detalhe."
+      cta="Marcar conversa"
+      ctaHref={withBase('contacto')}
+    />
+
+    {services.map((s, i) => (
+      <Section tone={i % 2 === 0 ? 'canvas' : 'canvas-alt'} id={s.id}>
+        <div class="tc-service-block">
+          <div>
+            <span class="tc-card__index">{s.index}</span>
+            <h2>{s.title}</h2>
+            <p style="margin-top:var(--tc-space-2);max-width:40ch">{s.intro}</p>
+          </div>
+          <ul class="tc-service-block__list">
+            {s.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </Section>
+    ))}
+
+    <Section tone="canvas">
+      <SectionHead label="Como funciona" title="Um processo em quatro passos" />
+      <div class="tc-accordion">
+        {steps.map((s, i) => (
+          <details class="tc-accordion-item" open={i === 0}>
+            <summary><span><span class="tc-accordion-item__step">{s.step}</span>{s.title}</span></summary>
+            <p class="tc-accordion-item__body">{s.body}</p>
+          </details>
+        ))}
+      </div>
+    </Section>
+
+    <Section tone="ink">
+      <div style="text-align:center;max-width:40ch;margin-inline:auto">
+        <Label pill>Vamos falar</Label>
+        <h2 style="margin-top:var(--tc-space-3)">Tem um projeto em mente?</h2>
+        <Button href={withBase('contacto')} style="margin-top:var(--tc-space-4)">Marcar conversa</Button>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

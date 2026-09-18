@@ -32,7 +32,7 @@ const projects = [
           <p class="tc-hero__intro">Websites, sistemas e consultoria para empresas que não aceitam o genérico.</p>
           <div class="tc-hero__actions">
             <Button href={withBase('contacto')}>Marcar conversa</Button>
-            <Button href={withBase('projetos')} variant="quiet">Ver projetos</Button>
+            <Button href={`${withBase('')}#projetos`} variant="quiet">Ver projetos</Button>
           </div>
         </div>
         <div class="tc-hero-b__media">
@@ -75,11 +75,11 @@ const projects = [
     </section>
 
     <!-- Projects: horizontal scroll-style gallery -->
-    <Section tone="canvas">
+    <Section tone="canvas" id="projetos">
       <SectionHead label="Projetos selecionados" title="Trabalho recente" />
       <div class="tc-gallery">
         {projects.map((p) => (
-          <a href={withBase('projetos')} class="tc-project-card tc-gallery__item" style={`width:clamp(240px, 80vw, ${p.width}px)`}>
+          <div class="tc-project-card tc-gallery__item" style={`width:clamp(240px, 80vw, ${p.width}px)`}>
             <ImageSlot caption={p.title} />
             <div class="tc-project-card__meta">
               <Label>{p.eyebrow}</Label>
@@ -88,22 +88,19 @@ const projects = [
                 {p.tags.map((t) => <Tag>{t}</Tag>)}
               </div>
             </div>
-          </a>
+          </div>
         ))}
-      </div>
-      <div style="margin-top:var(--tc-space-5)">
-        <Button href={withBase('projetos')} variant="quiet">Ver todos os projetos</Button>
       </div>
     </Section>
 
-    <Section tone="ink">
+    <Section tone="ink" id="sobre">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--tc-space-6);align-items:start">
         <Quote author="Ana Ribeiro" role="Diretora, Vale Imobiliária">Percebeu a marca antes de escrever uma linha de código.</Quote>
         <div>
           <AccentRule />
           <Label>Sobre</Label>
           <p style="margin-top:var(--tc-space-2)">TCWeb é a prática de Tiago Carneiro, desenvolvedor web e consultor de software, com quinze anos de experiência, em Lousado, Vila Nova de Famalicão.</p>
-          <Button href={withBase('sobre')} style="margin-top:var(--tc-space-3)">Conhecer o TCWeb</Button>
+          <Button href={withBase('contacto')} style="margin-top:var(--tc-space-3)">Marcar conversa</Button>
         </div>
       </div>
     </Section>
