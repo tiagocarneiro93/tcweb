@@ -75,6 +75,9 @@
 .tc-stats-photo__bg{position:absolute;inset:0;aspect-ratio:auto;border-radius:0;border:0}
 .tc-stats-photo__scrim{position:absolute;inset:0;background:rgba(20,22,26,.62)}
 .tc-stats-photo__content{position:relative}
+.tc-stats-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:var(--tc-space-4)}
+@media (max-width:820px){.tc-stats-grid{grid-template-columns:repeat(2, 1fr)}}
+@media (max-width:420px){.tc-stats-grid{grid-template-columns:1fr}}
 
 /* Home projects — horizontal scroll-style gallery */
 .tc-gallery{display:flex;gap:var(--tc-space-3);overflow-x:auto;padding-bottom:var(--tc-space-2)}
