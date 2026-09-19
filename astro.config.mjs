@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 
 // GITHUB_PAGES is set by .github/workflows/deploy-pages.yml so the site
@@ -13,5 +12,5 @@ export default defineConfig({
   // the /tcweb subpath belongs (also see src/lib/url.ts for in-page links).
   site: isGithubPages ? 'https://tiagocarneiro93.github.io' : 'https://tiagocarneiro.pt',
   base: isGithubPages ? '/tcweb' : '/',
-  integrations: [react(), sitemap()],
+  integrations: [sitemap()],
 });
