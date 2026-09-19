@@ -88,6 +88,9 @@
 .tc-nav-link[aria-current="page"]{color:var(--tc-text);border-bottom-color:var(--tc-accent)}
 .tc-nav-link[aria-current="page"]:hover{color:var(--tc-text)}
 
+.tc-header__lang{border:var(--tc-rule-width) solid var(--tc-rule);border-radius:var(--tc-radius-pill);padding:0.3em 0.75em;font-size:var(--tc-fs-label);letter-spacing:var(--tc-track-label)}
+.tc-header__lang:hover{border-color:var(--tc-accent)}
+
 .tc-header{border-bottom:var(--tc-rule-width) solid var(--tc-rule);background:var(--tc-canvas)}
 .tc-header__bar{max-width:var(--tc-max-width);margin-inline:auto;padding-inline:var(--tc-gutter);padding-block:var(--tc-space-3);display:flex;align-items:center;justify-content:space-between;gap:var(--tc-space-4);flex-wrap:wrap}
 .tc-header__nav{display:flex;align-items:center;gap:var(--tc-space-4);flex-wrap:wrap;justify-content:flex-end}
@@ -203,6 +206,14 @@
   .tc-cookie-table__row{grid-template-columns:1fr;gap:var(--tc-space-1)}
   .tc-cookie-table__row span[data-label]::before{content:attr(data-label) ": ";font-family:var(--tc-font-display);font-size:var(--tc-fs-label);letter-spacing:var(--tc-track-label);text-transform:uppercase;color:var(--tc-accent)}
 }
+
+/* 404 — shared across languages since GitHub Pages serves one error page site-wide */
+.tc-404{text-align:center;max-width:40ch;margin-inline:auto;padding-block:var(--tc-space-6)}
+.tc-404__title{margin-top:var(--tc-space-3);font-size:var(--tc-fs-h1)}
+.tc-404__title-en{font-size:var(--tc-fs-h2);color:var(--tc-text-muted)}
+.tc-404__body{margin-top:var(--tc-space-2)}
+.tc-404__actions{justify-content:center}
+.tc-404__rule{margin-top:var(--tc-space-6);margin-bottom:var(--tc-space-5)}
 
 .tc-footer{padding-block:var(--tc-space-6)}
 .tc-footer__inner{max-width:var(--tc-max-width);margin-inline:auto;padding-inline:var(--tc-gutter)}

@@ -4,6 +4,7 @@ import Hero from '../components/shared/Hero.astro';
 import Section from '../components/core/Section.astro';
 import Label from '../components/core/Label.astro';
 import Stat from '../components/content/Stat.astro';
+import { withBase } from '../lib/url';
 
 // No backend yet on this static site — the form submits via a mailto: draft
 // so it works today without a signup. Swap `action` for a form service
@@ -16,7 +17,7 @@ const budgets = ['Até 3 000 €', '3 000 € – 7 500 €', '7 500 € +', 'Ai
 <BaseLayout
   title="Contacto · TCWeb"
   description="Vamos falar do seu projeto. Conte-nos o que precisa e respondemos em menos de 24 horas."
-  path="contacto"
+  page="contact"
 >
   <main>
     <Hero
@@ -70,7 +71,7 @@ const budgets = ['Até 3 000 €', '3 000 € – 7 500 €', '7 500 € +', 'Ai
           </label>
           <label class="tc-form__consent">
             <input type="checkbox" required />
-            <span>Autorizo o tratamento dos meus dados para efeitos de resposta a este contacto, nos termos do RGPD.</span>
+            <span>Autorizo o tratamento dos meus dados para efeitos de resposta a este contacto, nos termos da <a href={withBase('politica-de-privacidade')}>Política de Privacidade</a>.</span>
           </label>
           <button type="submit" class="tc-button">Enviar mensagem</button>
         </form>

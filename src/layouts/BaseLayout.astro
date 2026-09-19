@@ -4,27 +4,39 @@ import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
 import CookieConsent from '../components/shared/CookieConsent.astro';
 import { withBase } from '../lib/url';
+import { routes, localePath, type RouteKey, type Lang } from '../lib/routes';
 
 interface Props {
   title: string;
   description: string;
-  /** Route path relative to the site root, no leading/trailing slash (e.g. "" for home, "servicos" for a future page). */
-  path?: string;
+  /** Which page this is, so canonical/hreflang/the language switcher can look up its slug in every language. */
+  page?: RouteKey;
   /** Path under public/ for the social-share image. */
   image?: string;
+  lang?: Lang;
+  /** For utility pages (404...) that shouldn't be indexed or listed as a hreflang alternate. */
+  noindex?: boolean;
 }
-const { title, description, path = '', image = 'og-image.png' } = Astro.props;
+const { title, description, page = 'home', image = 'og-image.png', lang = 'pt', noindex = false } = Astro.props;
 
-const canonicalURL = new URL(withBase(path), Astro.site);
+const altLang: Lang = lang === 'en' ? 'pt' : 'en';
+const canonicalURL = new URL(withBase(localePath(lang, routes[page][lang])), Astro.site);
+const alternateURL = new URL(withBase(localePath(altLang, routes[page][altLang])), Astro.site);
 const imageURL = new URL(withBase(image), Astro.site);
+
+const htmlLang = lang === 'en' ? 'en' : 'pt-PT';
+const ogLocale = lang === 'en' ? 'en_US' : 'pt_PT';
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'TCWeb',
   url: Astro.site ? new URL(withBase(''), Astro.site).href : undefined,
-  description: 'Websites, sistemas e consultoria para empresas que não aceitam o genérico.',
-  slogan: 'Presença digital à medida.',
+  description:
+    lang === 'en'
+      ? 'Websites, systems and consulting for businesses that won’t settle for generic.'
+      : 'Websites, sistemas e consultoria para empresas que não aceitam o genérico.',
+  slogan: lang === 'en' ? 'Digital presence, tailored.' : 'Presença digital à medida.',
   areaServed: 'PT',
   address: {
     '@type': 'PostalAddress',
@@ -39,7 +51,7 @@ const structuredData = {
 };
 ---
 <!doctype html>
-<html lang="pt-PT">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +60,16 @@ const structuredData = {
     <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={withBase('apple-touch-icon.svg')} />
     <link rel="manifest" href={withBase('site.webmanifest')} />
-    <link rel="canonical" href={canonicalURL} />
+    {noindex ? (
+      <meta name="robots" content="noindex" />
+    ) : (
+      <Fragment>
+        <link rel="canonical" href={canonicalURL} />
+        <link rel="alternate" hreflang={lang === 'en' ? 'en' : 'pt-PT'} href={canonicalURL} />
+        <link rel="alternate" hreflang={altLang === 'en' ? 'en' : 'pt-PT'} href={alternateURL} />
+        <link rel="alternate" hreflang="x-default" href={lang === 'pt' ? canonicalURL : alternateURL} />
+      </Fragment>
+    )}
     <meta name="theme-color" content="#14161A" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -57,7 +78,7 @@ const structuredData = {
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="TCWeb" />
-    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
@@ -74,9 +95,9 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} is:inline />
   </head>
   <body>
-    <SiteHeader />
+    <SiteHeader lang={lang} altHref={alternateURL.pathname} />
     <slot />
-    <SiteFooter />
-    <CookieConsent />
+    <SiteFooter lang={lang} />
+    <CookieConsent lang={lang} />
   </body>
 </html>

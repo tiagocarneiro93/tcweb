@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/shared/Hero.astro';
+import Section from '../components/core/Section.astro';
+import { withBase } from '../lib/url';
+---
+<BaseLayout
+  title="Política de Privacidade · TCWeb"
+  description="Como a TCWeb recolhe, utiliza e protege os seus dados pessoais, e quais são os seus direitos ao abrigo do RGPD."
+  page="privacy"
+>
+  <main>
+    <Hero
+      label="Política de Privacidade"
+      title="Como tratamos os seus dados."
+      intro="Um resumo claro de que dados pessoais recolhemos, para quê, e quais são os seus direitos."
+    />
+
+    <Section tone="canvas" padding="tight">
+      <div class="tc-measure-block">
+        <h2>Quem é o responsável pelo tratamento</h2>
+        <p>A TCWeb, atividade de Tiago Carneiro (NIF [NIF]), com sede em Lousado, Vila Nova de Famalicão, é responsável pelo tratamento dos dados pessoais recolhidos através deste site. Para qualquer questão sobre privacidade, contacte-nos através de <a href="mailto:[EMAIL]">[EMAIL]</a>.</p>
+
+        <h2>Que dados recolhemos</h2>
+        <p>Recolhemos apenas os dados que nos fornece diretamente através do formulário de contacto: nome, empresa (opcional), email, tipo de projeto, orçamento previsto e a mensagem que escreve. Não recolhemos dados pessoais através de cookies de momento — veja a nossa <a href={withBase('politica-de-cookies')}>Política de Cookies</a> para mais detalhe sobre o que é guardado no seu navegador.</p>
+
+        <h2>Como usamos os seus dados</h2>
+        <p>Usamos os dados do formulário de contacto exclusivamente para responder à sua mensagem e, se for o caso, preparar uma proposta para o projeto descrito. A base legal para este tratamento é o seu consentimento, dado ao submeter o formulário.</p>
+
+        <h2>Para onde vão os seus dados</h2>
+        <p>O formulário de contacto envia a mensagem diretamente para o email da TCWeb através do seu próprio cliente de email — os dados não passam por, nem ficam armazenados em, nenhum servidor ou serviço de terceiros. Este site é alojado como um conjunto de ficheiros estáticos (sem base de dados), pelo que não mantemos um registo próprio das mensagens recebidas para além da sua caixa de correio.</p>
+
+        <h2>Quanto tempo guardamos os seus dados</h2>
+        <p>Guardamos a sua mensagem apenas durante o tempo necessário para responder e, caso avancemos para um projeto, durante a relação contratual e o período subsequente exigido por obrigações fiscais e contabilísticas. Pode pedir a eliminação da sua mensagem a qualquer momento.</p>
+
+        <h2>Os seus direitos</h2>
+        <p>Ao abrigo do RGPD, tem direito a aceder, retificar, apagar ou limitar o tratamento dos seus dados, a opor-se ao tratamento e à portabilidade dos dados. Pode exercer estes direitos contactando-nos através de <a href="mailto:[EMAIL]">[EMAIL]</a>. Tem também o direito de apresentar reclamação junto da Comissão Nacional de Proteção de Dados (CNPD), através de <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">www.cnpd.pt</a>.</p>
+
+        <h2>Menores</h2>
+        <p>Este site não se dirige a menores de idade e não recolhemos intencionalmente dados de menores.</p>
+
+        <h2>Alterações a esta política</h2>
+        <p>Esta política pode ser atualizada para refletir alterações no site ou na lei aplicável. A versão em vigor é sempre a publicada nesta página.</p>
+        <p style="font-size:var(--tc-fs-label);color:var(--tc-text-muted);letter-spacing:var(--tc-track-label);text-transform:uppercase">Última atualização: setembro de 2026</p>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>
