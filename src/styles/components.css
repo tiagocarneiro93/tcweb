@@ -92,7 +92,10 @@
 .tc-header__bar{max-width:var(--tc-max-width);margin-inline:auto;padding-inline:var(--tc-gutter);padding-block:var(--tc-space-3);display:flex;align-items:center;justify-content:space-between;gap:var(--tc-space-4);flex-wrap:wrap}
 .tc-header__nav{display:flex;align-items:center;gap:var(--tc-space-4);flex-wrap:wrap;justify-content:flex-end}
 
-.tc-header__toggle-input{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+/* display:none by default — a hidden control with a hidden label is fine;
+   a focusable-but-invisible one (the old default here) trips axe's
+   "label is hidden" check, since desktop has no toggle to focus at all. */
+.tc-header__toggle-input{display:none}
 .tc-header__toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:28px;height:22px;cursor:pointer}
 .tc-header__toggle span{display:block;height:2px;background:var(--tc-text);border-radius:1px;transition:var(--tc-transition)}
 .tc-header__toggle-input:focus-visible ~ .tc-header__toggle{outline:var(--tc-focus-ring);outline-offset:var(--tc-focus-offset)}
@@ -101,6 +104,7 @@
 .tc-header__toggle-input:checked ~ .tc-header__toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 @media (max-width:640px){
+  .tc-header__toggle-input{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .tc-header__toggle{display:flex}
   .tc-header__nav{
     display:none;

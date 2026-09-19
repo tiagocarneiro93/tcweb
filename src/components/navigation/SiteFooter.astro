@@ -30,7 +30,7 @@ const columns = [
       </div>
       {columns.map((col) => (
         <div>
-          <Label as="h3" class="tc-footer__col-title">{col.title}</Label>
+          <Label as="div" class="tc-footer__col-title">{col.title}</Label>
           <ul class="tc-footer__links">
             {col.links.map((l) => (
               <li><a href={l.href}>{l.label}</a></li>
@@ -39,7 +39,7 @@ const columns = [
         </div>
       ))}
       <div>
-        <Label as="h3" class="tc-footer__col-title">Contacto</Label>
+        <Label as="div" class="tc-footer__col-title">Contacto</Label>
         <div class="tc-footer__contact">
           <a href="mailto:[EMAIL]">[EMAIL]</a>
           <span>[TELEFONE]</span>
