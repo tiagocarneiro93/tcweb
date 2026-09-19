@@ -2,21 +2,32 @@
 import Logo from '../core/Logo.astro';
 import Label from '../core/Label.astro';
 import { withBase } from '../../lib/url';
+import { routes, anchors, localePath, type Lang } from '../../lib/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'pt' } = Astro.props;
+const ui = t(lang);
+
+const homeHref = withBase(localePath(lang, routes.home[lang]));
+const servicesHref = withBase(localePath(lang, routes.services[lang]));
 
 const columns = [
   {
-    title: 'Serviços',
+    title: ui.footer.servicesCol,
     links: [
-      { label: 'Websites', href: `${withBase('servicos')}#websites` },
-      { label: 'Sistemas', href: `${withBase('servicos')}#sistemas` },
-      { label: 'Consultoria', href: `${withBase('servicos')}#consultoria` },
+      { label: ui.footer.websites, href: `${servicesHref}#websites` },
+      { label: ui.footer.systems, href: `${servicesHref}#${lang === 'en' ? 'systems' : 'sistemas'}` },
+      { label: ui.footer.consulting, href: `${servicesHref}#${lang === 'en' ? 'consulting' : 'consultoria'}` },
     ],
   },
   {
-    title: 'Empresa',
+    title: ui.footer.companyCol,
     links: [
-      { label: 'Projetos', href: `${withBase('')}#projetos` },
-      { label: 'Sobre', href: `${withBase('')}#sobre` },
+      { label: ui.footer.projects, href: `${homeHref}#${anchors.projects[lang]}` },
+      { label: ui.footer.about, href: `${homeHref}#${anchors.about[lang]}` },
     ],
   },
 ];
@@ -26,7 +37,7 @@ const columns = [
     <div class="tc-footer__grid">
       <div>
         <Logo variant="stacked" tone="canvas" height={72} />
-        <p class="tc-footer__tagline">Presença digital à medida.</p>
+        <p class="tc-footer__tagline">{ui.footer.tagline}</p>
       </div>
       {columns.map((col) => (
         <div>
@@ -39,7 +50,7 @@ const columns = [
         </div>
       ))}
       <div>
-        <Label as="div" class="tc-footer__col-title">Contacto</Label>
+        <Label as="div" class="tc-footer__col-title">{ui.footer.contactCol}</Label>
         <div class="tc-footer__contact">
           <a href="mailto:[EMAIL]">[EMAIL]</a>
           <span>[TELEFONE]</span>
@@ -50,10 +61,11 @@ const columns = [
     <div class="tc-footer__legal">
       <span>© {new Date().getFullYear()} TCWeb · Tiago Carneiro</span>
       <div class="tc-footer__legal-links">
-        <a href={withBase('politica-de-cookies')}>Política de cookies</a>
-        <button type="button" data-cookie-settings>Preferências de cookies</button>
+        <a href={withBase(localePath(lang, routes.privacy[lang]))}>{ui.footer.privacyPolicy}</a>
+        <a href={withBase(localePath(lang, routes.cookies[lang]))}>{ui.footer.cookiePolicy}</a>
+        <button type="button" data-cookie-settings>{ui.footer.cookieSettings}</button>
       </div>
-      <span>NIF [NIF]</span>
+      <span>{ui.footer.nif} [NIF]</span>
     </div>
   </div>
 </footer>

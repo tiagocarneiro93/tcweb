@@ -3,31 +3,47 @@ import Logo from '../core/Logo.astro';
 import NavLink from './NavLink.astro';
 import Button from '../core/Button.astro';
 import { withBase } from '../../lib/url';
+import { routes, anchors, localePath, type Lang } from '../../lib/routes';
+import { t } from '../../i18n/ui';
 
-// Projetos and Sobre don't have enough real content yet for standalone
-// pages, so they point at the teaser sections on the home page instead.
+interface Props {
+  lang?: Lang;
+  /** Path (with base already applied) to the equivalent page in the other language. */
+  altHref?: string;
+}
+const { lang = 'pt', altHref } = Astro.props;
+const ui = t(lang);
+
+const homeHref = withBase(localePath(lang, routes.home[lang]));
+
+// Projetos/Projects and Sobre/About don't have enough real content yet for
+// standalone pages, so they point at the teaser sections on the home page.
 const items = [
-  { label: 'Serviços', href: withBase('servicos') },
-  { label: 'Projetos', href: `${withBase('')}#projetos` },
-  { label: 'Sobre', href: `${withBase('')}#sobre` },
+  { label: ui.nav.services, href: withBase(localePath(lang, routes.services[lang])) },
+  { label: ui.nav.projects, href: `${homeHref}#${anchors.projects[lang]}` },
+  { label: ui.nav.about, href: `${homeHref}#${anchors.about[lang]}` },
 ];
 
 const currentPath = Astro.url.pathname;
+const toggleLabel = lang === 'en' ? 'Open navigation menu' : 'Abrir menu de navegação';
 ---
 <header class="tc-header">
   <div class="tc-header__bar">
-    <a href={withBase('')} style="display:block">
+    <a href={homeHref} style="display:block">
       <Logo variant="short" tone="ink" height={26} />
     </a>
     <input type="checkbox" id="nav-toggle" class="tc-header__toggle-input" />
-    <label for="nav-toggle" class="tc-header__toggle" aria-label="Abrir menu de navegação">
+    <label for="nav-toggle" class="tc-header__toggle" aria-label={toggleLabel}>
       <span></span><span></span><span></span>
     </label>
     <nav class="tc-header__nav" id="site-nav">
       {items.map((it) => (
         <NavLink href={it.href} active={currentPath === it.href}>{it.label}</NavLink>
       ))}
-      <Button href={withBase('contacto')} size="sm">Marcar conversa</Button>
+      {altHref && (
+        <a href={altHref} class="tc-nav-link tc-header__lang" hreflang={lang === 'en' ? 'pt-PT' : 'en'}>{ui.nav.switchTo}</a>
+      )}
+      <Button href={withBase(localePath(lang, routes.contact[lang]))} size="sm">{ui.nav.cta}</Button>
     </nav>
   </div>
 </header>

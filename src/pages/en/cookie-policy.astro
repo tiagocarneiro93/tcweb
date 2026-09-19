@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/shared/Hero.astro';
+import Section from '../../components/core/Section.astro';
+
+const categories = [
+  {
+    name: 'Necessary',
+    purpose: 'Remember your cookie choice and ensure the site works properly.',
+    example: 'tc-cookie-consent (browser local storage)',
+    duration: 'Until changed or cleared by you',
+  },
+  {
+    name: 'Analytics',
+    purpose: 'Understand, in aggregate, how the site is used. Not currently in use.',
+    example: '—',
+    duration: '—',
+  },
+  {
+    name: 'Marketing',
+    purpose: 'Measure campaign effectiveness and show relevant content. Not currently in use.',
+    example: '—',
+    duration: '—',
+  },
+];
+---
+<BaseLayout
+  title="Cookie Policy · TCWeb"
+  description="What cookies and similar technologies the TCWeb site uses, why, and how you can manage your preferences."
+  page="cookies"
+  lang="en"
+>
+  <main>
+    <Hero
+      label="Cookie Policy"
+      title="How we use cookies."
+      intro="A plain-language summary of what's stored in your browser when you visit this site, and how to change your choice at any time."
+    />
+
+    <Section tone="canvas" padding="tight">
+      <div class="tc-measure-block">
+        <h2>What cookies are</h2>
+        <p>Cookies are small files stored in your browser when you visit a site. They help the site work correctly, remember preferences, or gather information about how it's used. The law requires your consent for any cookie that isn't strictly necessary for the site to function.</p>
+
+        <h2>Categories we use</h2>
+      </div>
+
+      <div class="tc-cookie-table" role="table">
+        <div class="tc-cookie-table__row tc-cookie-table__row--head" role="row">
+          <span role="columnheader">Category</span>
+          <span role="columnheader">Purpose</span>
+          <span role="columnheader">Example</span>
+          <span role="columnheader">Duration</span>
+        </div>
+        {categories.map((c) => (
+          <div class="tc-cookie-table__row" role="row">
+            <span role="cell" data-label="Category">{c.name}</span>
+            <span role="cell" data-label="Purpose">{c.purpose}</span>
+            <span role="cell" data-label="Example">{c.example}</span>
+            <span role="cell" data-label="Duration">{c.duration}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="tc-measure-block">
+        <p>Analytics and marketing cookies are only activated if you give explicit consent. If this site adds tools such as traffic analysis or advertising in the future, this page and the category summary will be updated before those technologies go live.</p>
+
+        <h2>How to change your choice</h2>
+        <p>You can accept, reject or customize your preferences at any time using the button below, or the "Cookie preferences" link in the site footer.</p>
+        <button type="button" class="tc-button tc-button--outline" data-cookie-settings>Manage cookie preferences</button>
+
+        <h2>Contact</h2>
+        <p>For questions about this policy, contact us at <a href="mailto:[EMAIL]">[EMAIL]</a>.</p>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

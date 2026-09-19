@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/shared/Hero.astro';
+import Section from '../../components/core/Section.astro';
+import { withBase } from '../../lib/url';
+import { routes, localePath } from '../../lib/routes';
+
+const cookiesHref = withBase(localePath('en', routes.cookies.en));
+---
+<BaseLayout
+  title="Privacy Policy · TCWeb"
+  description="How TCWeb collects, uses and protects your personal data, and what your rights are under the GDPR."
+  page="privacy"
+  lang="en"
+>
+  <main>
+    <Hero
+      label="Privacy Policy"
+      title="How we handle your data."
+      intro="A clear summary of what personal data we collect, why, and what your rights are."
+    />
+
+    <Section tone="canvas" padding="tight">
+      <div class="tc-measure-block">
+        <h2>Who is responsible for processing your data</h2>
+        <p>TCWeb, the practice of Tiago Carneiro (Tax ID [NIF]), based in Lousado, Vila Nova de Famalicão, Portugal, is responsible for processing personal data collected through this site. For any privacy question, contact us at <a href="mailto:[EMAIL]">[EMAIL]</a>.</p>
+
+        <h2>What data we collect</h2>
+        <p>We only collect what you give us directly through the contact form: name, company (optional), email, project type, estimated budget, and the message you write. We don't currently collect personal data through cookies — see our <a href={cookiesHref}>Cookie Policy</a> for details on what's stored in your browser.</p>
+
+        <h2>How we use your data</h2>
+        <p>We use contact-form data exclusively to reply to your message and, where relevant, prepare a proposal for the project you described. The legal basis for this processing is the consent you give by submitting the form.</p>
+
+        <h2>Where your data goes</h2>
+        <p>The contact form sends your message directly to TCWeb's email through your own email client — the data doesn't pass through, or get stored on, any server or third-party service. This site is hosted as a set of static files (no database), so we keep no record of enquiries beyond your own mailbox.</p>
+
+        <h2>How long we keep your data</h2>
+        <p>We keep your message only for as long as needed to respond and, should we move forward with a project together, for the duration of that relationship plus any period required by tax and accounting obligations. You can ask us to delete your message at any time.</p>
+
+        <h2>Your rights</h2>
+        <p>Under the GDPR, you have the right to access, rectify, erase or restrict the processing of your data, to object to processing, and to data portability. You can exercise these rights by contacting us at <a href="mailto:[EMAIL]">[EMAIL]</a>. You also have the right to lodge a complaint with Portugal's data protection authority, the Comissão Nacional de Proteção de Dados (CNPD), at <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">www.cnpd.pt</a>.</p>
+
+        <h2>Children</h2>
+        <p>This site isn't directed at children, and we don't knowingly collect data from minors.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>This policy may be updated to reflect changes to the site or to applicable law. The version in force is always the one published on this page.</p>
+        <p style="font-size:var(--tc-fs-label);color:var(--tc-text-muted);letter-spacing:var(--tc-track-label);text-transform:uppercase">Last updated: September 2026</p>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

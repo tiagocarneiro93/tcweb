@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/core/Section.astro';
+import AccentRule from '../../components/core/AccentRule.astro';
+import Label from '../../components/core/Label.astro';
+import Button from '../../components/core/Button.astro';
+import Card from '../../components/content/Card.astro';
+import Stat from '../../components/content/Stat.astro';
+import Quote from '../../components/content/Quote.astro';
+import Tag from '../../components/content/Tag.astro';
+import SectionHead from '../../components/shared/SectionHead.astro';
+import ImageSlot from '../../components/shared/ImageSlot.astro';
+import { withBase } from '../../lib/url';
+import { routes, anchors, localePath } from '../../lib/routes';
+
+const contactHref = withBase(localePath('en', routes.contact.en));
+const homeHref = withBase(localePath('en', routes.home.en));
+
+// Placeholder case studies — replace with real client work before launch.
+// Keep this list in sync with src/pages/index.astro (the Portuguese source).
+const projects = [
+  { eyebrow: 'Real estate', title: 'Quinta do Vale', tags: ['Branding', 'Website', 'SEO'], width: 420 },
+  { eyebrow: 'Retail', title: 'Casa Alvarinho', tags: ['Online store', 'Integrations'], width: 340 },
+  { eyebrow: 'Services', title: 'Clínica Norte', tags: ['Website', 'Bookings'], width: 340 },
+];
+---
+<BaseLayout
+  title="TCWeb · Digital presence, tailored"
+  description="Websites, systems and consulting for businesses that won't settle for generic. TCWeb is the practice of Tiago Carneiro, based in Lousado, Vila Nova de Famalicão."
+  lang="en"
+>
+  <main>
+    <!-- Hero: centered copy beside a rotated, fanned photo stack -->
+    <Section tone="canvas">
+      <div class="tc-hero-b__row">
+        <div class="tc-hero-b__copy">
+          <h1 class="tc-display">Tailored digital presence for demanding brands.</h1>
+          <p class="tc-hero__intro">Websites, systems and consulting for businesses that won't settle for generic.</p>
+          <div class="tc-hero__actions">
+            <Button href={contactHref}>Book a call</Button>
+            <Button href={`${homeHref}#${anchors.projects.en}`} variant="quiet">View projects</Button>
+          </div>
+        </div>
+        <div class="tc-hero-b__media">
+          <div class="tc-hero-b__accent"></div>
+          <ImageSlot caption="Photo — building facade" class="tc-hero-b__photo tc-hero-b__photo--1" />
+          <ImageSlot caption="Interior detail" class="tc-hero-b__photo tc-hero-b__photo--2" />
+        </div>
+      </div>
+    </Section>
+
+    <!-- Services: one featured card (with image) beside two stacked ones -->
+    <Section tone="canvas">
+      <SectionHead label="Services" title="What we do" intro="Three lines of work, one way of working: with method and attention to detail." />
+      <div class="tc-services-a">
+        <div class="tc-card tc-services-a__featured">
+          <div>
+            <span class="tc-card__index">01</span>
+            <h3 class="tc-card__title">Websites</h3>
+            <p class="tc-card__body">Institutional sites and portfolios designed down to the last detail — fast and accessible.</p>
+          </div>
+          <ImageSlot caption="Photo — website on screen" class="tc-services-a__image" />
+        </div>
+        <Card index={2} title="Systems">Integrations, automation and maintenance for the systems your business already uses.</Card>
+        <Card index={3} title="Consulting">Fifteen years of experience behind your technical decisions.</Card>
+      </div>
+    </Section>
+
+    <!-- Stats: overlaid on a full-bleed photo band -->
+    <section class="tc-dark tc-stats-photo">
+      <ImageSlot tone="ink" caption="Photo — desk setup" class="tc-stats-photo__bg" />
+      <div class="tc-stats-photo__scrim"></div>
+      <div class="tc-container tc-stats-photo__content">
+        <div class="tc-stats-grid">
+          <Stat value="15" label="Years of experience" />
+          <Stat value="100/100" label="Lighthouse" />
+          <Stat value="<24h" label="Response time" />
+          <Stat value="PT" label="Famalicão, Portugal" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects: horizontal scroll-style gallery -->
+    <Section tone="canvas" id={anchors.projects.en}>
+      <SectionHead label="Selected projects" title="Recent work" />
+      <div class="tc-gallery">
+        {projects.map((p) => (
+          <div class="tc-project-card tc-gallery__item" style={`width:clamp(240px, 80vw, ${p.width}px)`}>
+            <ImageSlot caption={p.title} />
+            <div class="tc-project-card__meta">
+              <Label>{p.eyebrow}</Label>
+              <h3 class="tc-project-card__title">{p.title}</h3>
+              <div class="tc-project-card__tags">
+                {p.tags.map((t) => <Tag>{t}</Tag>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+
+    <Section tone="ink" id={anchors.about.en}>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--tc-space-6);align-items:start">
+        <Quote author="Ana Ribeiro" role="Director, Vale Imobiliária">Understood the brand before writing a line of code.</Quote>
+        <div>
+          <AccentRule />
+          <Label>About</Label>
+          <p style="margin-top:var(--tc-space-2)">TCWeb is the practice of Tiago Carneiro, web developer and software consultant, with fifteen years of experience, based in Lousado, Vila Nova de Famalicão.</p>
+          <Button href={contactHref} style="margin-top:var(--tc-space-3)">Book a call</Button>
+        </div>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

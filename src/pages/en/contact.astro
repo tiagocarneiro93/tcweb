@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/shared/Hero.astro';
+import Section from '../../components/core/Section.astro';
+import Label from '../../components/core/Label.astro';
+import Stat from '../../components/content/Stat.astro';
+import { withBase } from '../../lib/url';
+import { routes, localePath } from '../../lib/routes';
+
+// No backend yet on this static site — the form submits via a mailto: draft
+// so it works today without a signup. Swap `action` for a form service
+// (Formspree, Getform, ...) once one is chosen. Keep in sync with
+// src/pages/contacto.astro (the Portuguese source).
+const contactEmail = '[EMAIL]';
+const privacyHref = withBase(localePath('en', routes.privacy.en));
+
+const projectTypes = ['Website', 'System / integration', 'Consulting', 'Other'];
+const budgets = ['Up to €3,000', '€3,000 – €7,500', '€7,500 +', 'Not sure yet'];
+---
+<BaseLayout
+  title="Contact · TCWeb"
+  description="Let's talk about your project. Tell us what you need and we'll respond within 24 hours."
+  page="contact"
+  lang="en"
+>
+  <main>
+    <Hero
+      label="Contact"
+      title="Let's talk about your project."
+      intro="Tell us what you need. A first conversation comes with no obligation."
+    />
+
+    <Section tone="canvas" padding="tight">
+      <div class="tc-contact-grid">
+        <form
+          class="tc-form"
+          action={`mailto:${contactEmail}`}
+          method="post"
+          enctype="text/plain"
+        >
+          <div class="tc-form__row">
+            <label class="tc-form__field">
+              <span class="tc-label">Name</span>
+              <input type="text" name="Name" required />
+            </label>
+            <label class="tc-form__field">
+              <span class="tc-label">Company</span>
+              <input type="text" name="Company" />
+            </label>
+          </div>
+          <label class="tc-form__field">
+            <span class="tc-label">Email</span>
+            <input type="email" name="Email" required />
+          </label>
+          <label class="tc-form__field">
+            <span class="tc-label">Project type</span>
+            <select name="Project type">
+              {projectTypes.map((t) => <option>{t}</option>)}
+            </select>
+          </label>
+          <fieldset class="tc-form__field">
+            <legend class="tc-label">Estimated budget</legend>
+            <div class="tc-form__radios">
+              {budgets.map((b, i) => (
+                <label class="tc-form__radio">
+                  <input type="radio" name="Budget" value={b} checked={i === 0} />
+                  <span>{b}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <label class="tc-form__field">
+            <span class="tc-label">Message</span>
+            <textarea name="Message" rows="5" required></textarea>
+          </label>
+          <label class="tc-form__consent">
+            <input type="checkbox" required />
+            <span>I consent to my data being processed to respond to this enquiry, under the <a href={privacyHref}>Privacy Policy</a>.</span>
+          </label>
+          <button type="submit" class="tc-button">Send message</button>
+        </form>
+
+        <aside class="tc-contact-aside">
+          <div>
+            <Label>Direct contact</Label>
+            <div class="tc-contact-aside__info">
+              <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+              <span>[TELEFONE]</span>
+              <span>Lousado · Vila Nova de Famalicão, Portugal</span>
+            </div>
+          </div>
+          <div class="tc-contact-aside__stats">
+            <Stat value="<24h" label="Response time" />
+            <Stat value="15" label="Years of experience" />
+          </div>
+        </aside>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>

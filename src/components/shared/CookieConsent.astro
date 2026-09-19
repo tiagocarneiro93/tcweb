@@ -1,44 +1,52 @@
 ---
 import { withBase } from '../../lib/url';
+import { routes, localePath, type Lang } from '../../lib/routes';
+import { t } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'pt' } = Astro.props;
+const ui = t(lang).cookie;
+const cookiesHref = withBase(localePath(lang, routes.cookies[lang]));
 ---
 <div id="tc-cookie-banner" class="tc-cookie-banner" hidden>
   <div class="tc-cookie-banner__inner">
     <p class="tc-cookie-banner__copy">
-      Utilizamos cookies essenciais ao funcionamento do site e, apenas com o seu consentimento,
-      cookies analíticos e de marketing. Pode aceitar, rejeitar ou escolher quais permitir.
-      <a href={withBase('politica-de-cookies')}>Saber mais</a>.
+      {ui.message}
+      {' '}<a href={cookiesHref}>{ui.learnMore}</a>.
     </p>
     <div class="tc-cookie-banner__actions">
-      <button type="button" class="tc-button tc-button--quiet" data-cookie-action="customize">Personalizar</button>
-      <button type="button" class="tc-button tc-button--outline" data-cookie-action="reject">Rejeitar todos</button>
-      <button type="button" class="tc-button" data-cookie-action="accept">Aceitar todos</button>
+      <button type="button" class="tc-button tc-button--quiet" data-cookie-action="customize">{ui.customize}</button>
+      <button type="button" class="tc-button tc-button--outline" data-cookie-action="reject">{ui.reject}</button>
+      <button type="button" class="tc-button" data-cookie-action="accept">{ui.accept}</button>
     </div>
   </div>
 
   <div id="tc-cookie-panel" class="tc-cookie-panel" hidden>
     <div class="tc-cookie-panel__item">
       <div>
-        <strong>Necessários</strong>
-        <p>Essenciais ao funcionamento do site, como guardar esta preferência. Estão sempre ativos.</p>
+        <strong>{ui.necessaryTitle}</strong>
+        <p>{ui.necessaryBody}</p>
       </div>
-      <input type="checkbox" checked disabled aria-label="Cookies necessários (sempre ativos)" />
+      <input type="checkbox" checked disabled aria-label={ui.necessaryTitle} />
     </div>
     <div class="tc-cookie-panel__item">
       <div>
-        <strong>Analíticos</strong>
-        <p>Ajudariam a perceber como o site é utilizado, de forma agregada. Não estão atualmente em uso.</p>
+        <strong>{ui.analyticsTitle}</strong>
+        <p>{ui.analyticsBody}</p>
       </div>
-      <input type="checkbox" data-cookie-category="analytics" aria-label="Cookies analíticos" />
+      <input type="checkbox" data-cookie-category="analytics" aria-label={ui.analyticsTitle} />
     </div>
     <div class="tc-cookie-panel__item">
       <div>
-        <strong>Marketing</strong>
-        <p>Usados para medir campanhas e mostrar conteúdo relevante. Não estão atualmente em uso.</p>
+        <strong>{ui.marketingTitle}</strong>
+        <p>{ui.marketingBody}</p>
       </div>
-      <input type="checkbox" data-cookie-category="marketing" aria-label="Cookies de marketing" />
+      <input type="checkbox" data-cookie-category="marketing" aria-label={ui.marketingTitle} />
     </div>
     <div class="tc-cookie-panel__save">
-      <button type="button" class="tc-button tc-button--sm" data-cookie-action="save">Guardar preferências</button>
+      <button type="button" class="tc-button tc-button--sm" data-cookie-action="save">{ui.save}</button>
     </div>
   </div>
 </div>
