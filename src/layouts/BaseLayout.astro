@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteHeader from '../components/navigation/SiteHeader.astro';
 import SiteFooter from '../components/navigation/SiteFooter.astro';
+import CookieConsent from '../components/shared/CookieConsent.astro';
 import { withBase } from '../lib/url';
 
 interface Props {
@@ -76,5 +77,6 @@ const structuredData = {
     <SiteHeader />
     <slot />
     <SiteFooter />
+    <CookieConsent />
   </body>
 </html>

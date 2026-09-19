@@ -1,0 +1,127 @@
+---
+import { withBase } from '../../lib/url';
+---
+<div id="tc-cookie-banner" class="tc-cookie-banner" hidden>
+  <div class="tc-cookie-banner__inner">
+    <p class="tc-cookie-banner__copy">
+      Utilizamos cookies essenciais ao funcionamento do site e, apenas com o seu consentimento,
+      cookies analíticos e de marketing. Pode aceitar, rejeitar ou escolher quais permitir.
+      <a href={withBase('politica-de-cookies')}>Saber mais</a>.
+    </p>
+    <div class="tc-cookie-banner__actions">
+      <button type="button" class="tc-button tc-button--quiet" data-cookie-action="customize">Personalizar</button>
+      <button type="button" class="tc-button tc-button--outline" data-cookie-action="reject">Rejeitar todos</button>
+      <button type="button" class="tc-button" data-cookie-action="accept">Aceitar todos</button>
+    </div>
+  </div>
+
+  <div id="tc-cookie-panel" class="tc-cookie-panel" hidden>
+    <div class="tc-cookie-panel__item">
+      <div>
+        <strong>Necessários</strong>
+        <p>Essenciais ao funcionamento do site, como guardar esta preferência. Estão sempre ativos.</p>
+      </div>
+      <input type="checkbox" checked disabled aria-label="Cookies necessários (sempre ativos)" />
+    </div>
+    <div class="tc-cookie-panel__item">
+      <div>
+        <strong>Analíticos</strong>
+        <p>Ajudariam a perceber como o site é utilizado, de forma agregada. Não estão atualmente em uso.</p>
+      </div>
+      <input type="checkbox" data-cookie-category="analytics" aria-label="Cookies analíticos" />
+    </div>
+    <div class="tc-cookie-panel__item">
+      <div>
+        <strong>Marketing</strong>
+        <p>Usados para medir campanhas e mostrar conteúdo relevante. Não estão atualmente em uso.</p>
+      </div>
+      <input type="checkbox" data-cookie-category="marketing" aria-label="Cookies de marketing" />
+    </div>
+    <div class="tc-cookie-panel__save">
+      <button type="button" class="tc-button tc-button--sm" data-cookie-action="save">Guardar preferências</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var STORAGE_KEY = 'tc-cookie-consent';
+    var banner = document.getElementById('tc-cookie-banner');
+    var panel = document.getElementById('tc-cookie-panel');
+    if (!banner || !panel) return;
+
+    function readConsent() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function writeConsent(consent) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+      } catch (e) {}
+      document.dispatchEvent(new CustomEvent('tc:consent-changed', { detail: consent }));
+    }
+
+    function applyToCheckboxes(consent) {
+      panel.querySelectorAll('[data-cookie-category]').forEach(function (input) {
+        input.checked = !!(consent && consent[input.dataset.cookieCategory]);
+      });
+    }
+
+    function openBanner(showPanel) {
+      banner.hidden = false;
+      panel.hidden = !showPanel;
+    }
+
+    function closeBanner() {
+      banner.hidden = true;
+      panel.hidden = true;
+    }
+
+    var existing = readConsent();
+    applyToCheckboxes(existing);
+    if (!existing) openBanner(false);
+
+    banner.addEventListener('click', function (event) {
+      var action = event.target.closest('[data-cookie-action]');
+      if (!action) return;
+      var type = action.dataset.cookieAction;
+      if (type === 'accept') {
+        writeConsent({ necessary: true, analytics: true, marketing: true, ts: Date.now() });
+        closeBanner();
+      } else if (type === 'reject') {
+        writeConsent({ necessary: true, analytics: false, marketing: false, ts: Date.now() });
+        closeBanner();
+      } else if (type === 'customize') {
+        panel.hidden = !panel.hidden;
+      } else if (type === 'save') {
+        var consent = { necessary: true, ts: Date.now() };
+        panel.querySelectorAll('[data-cookie-category]').forEach(function (input) {
+          consent[input.dataset.cookieCategory] = input.checked;
+        });
+        writeConsent(consent);
+        closeBanner();
+      }
+    });
+
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        applyToCheckboxes(readConsent());
+        openBanner(true);
+      });
+    });
+
+    // Exposed so future analytics/marketing scripts can gate themselves,
+    // e.g. `if (window.tcConsent.get()?.analytics) { ...load script... }`.
+    window.tcConsent = {
+      get: readConsent,
+      onChange: function (cb) {
+        document.addEventListener('tc:consent-changed', function (e) { cb(e.detail); });
+      },
+    };
+  })();
+</script>

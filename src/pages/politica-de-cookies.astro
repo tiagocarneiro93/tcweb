@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/shared/Hero.astro';
+import Section from '../components/core/Section.astro';
+
+const categories = [
+  {
+    name: 'Necessários',
+    purpose: 'Guardar a sua escolha de cookies e assegurar o funcionamento básico do site.',
+    example: 'tc-cookie-consent (armazenamento local do navegador)',
+    duration: 'Até ser alterada ou apagada por si',
+  },
+  {
+    name: 'Analíticos',
+    purpose: 'Perceber, de forma agregada, como o site é utilizado. Não estão atualmente em uso.',
+    example: '—',
+    duration: '—',
+  },
+  {
+    name: 'Marketing',
+    purpose: 'Medir a eficácia de campanhas e apresentar conteúdo relevante. Não estão atualmente em uso.',
+    example: '—',
+    duration: '—',
+  },
+];
+---
+<BaseLayout
+  title="Política de Cookies · TCWeb"
+  description="Que cookies e tecnologias semelhantes o site da TCWeb utiliza, para quê, e como pode gerir as suas preferências."
+  path="politica-de-cookies"
+>
+  <main>
+    <Hero
+      label="Política de Cookies"
+      title="Como usamos cookies."
+      intro="Um resumo simples do que é guardado no seu navegador quando visita este site, e como pode alterar a sua escolha a qualquer momento."
+    />
+
+    <Section tone="canvas" padding="tight">
+      <div class="tc-measure-block">
+        <h2>O que são cookies</h2>
+        <p>Cookies são pequenos ficheiros guardados no seu navegador quando visita um site. Servem para o site funcionar corretamente, lembrar preferências, ou recolher informação sobre a forma como é utilizado. A lei exige o seu consentimento para qualquer cookie que não seja estritamente necessário ao funcionamento do site.</p>
+
+        <h2>Categorias que utilizamos</h2>
+      </div>
+
+      <div class="tc-cookie-table" role="table">
+        <div class="tc-cookie-table__row tc-cookie-table__row--head" role="row">
+          <span role="columnheader">Categoria</span>
+          <span role="columnheader">Finalidade</span>
+          <span role="columnheader">Exemplo</span>
+          <span role="columnheader">Duração</span>
+        </div>
+        {categories.map((c) => (
+          <div class="tc-cookie-table__row" role="row">
+            <span role="cell" data-label="Categoria">{c.name}</span>
+            <span role="cell" data-label="Finalidade">{c.purpose}</span>
+            <span role="cell" data-label="Exemplo">{c.example}</span>
+            <span role="cell" data-label="Duração">{c.duration}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="tc-measure-block">
+        <p>Os cookies analíticos e de marketing só são ativados se der o seu consentimento explícito. Se este site vier a integrar ferramentas como análise de tráfego ou publicidade, esta página e o resumo de categorias serão atualizados antes de essas tecnologias serem ativadas.</p>
+
+        <h2>Como alterar a sua escolha</h2>
+        <p>Pode aceitar, rejeitar ou personalizar as suas preferências a qualquer momento através do botão abaixo, ou do link "Preferências de cookies" no rodapé do site.</p>
+        <button type="button" class="tc-button tc-button--outline" data-cookie-settings>Gerir preferências de cookies</button>
+
+        <h2>Contacto</h2>
+        <p>Para questões sobre esta política, contacte-nos através de <a href="mailto:[EMAIL]">[EMAIL]</a>.</p>
+      </div>
+    </Section>
+  </main>
+</BaseLayout>
